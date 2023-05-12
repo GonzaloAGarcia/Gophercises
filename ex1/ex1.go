@@ -1,8 +1,7 @@
-package main
+package ex1
 
 import (
 	"encoding/csv"
-	"flag"
 	"fmt"
 	"os"
 )
@@ -13,20 +12,17 @@ type dataFrame struct {
 	userAnswer string
 }
 
-func main() {
+func Ex1(path string) {
 
 	var correctCount int = 0
 	var questionCount int = 0
-	var path = flag.String("path", "problems.csv", "Set path to CSV file with questions.")
 
-	flag.Parse()
-
-	f, err := os.Open(*path)
+	f, err := os.Open(path)
 	if err != nil {
 		fmt.Println(err)
 	}
 	defer f.Close()
-	fmt.Printf("Opened CSV from %s. \n", *path)
+	fmt.Printf("Opened CSV from %s. \n", path)
 
 	problems, err := csv.NewReader(f).ReadAll()
 	if err != nil {
